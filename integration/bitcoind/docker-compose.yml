@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  bitcoin-signet-node:
+    build: .
+    container_name: bitcoin-signet-node
+    ports:
+      - "38332:38332"
+    volumes:
+      - bitcoin-data:/bitcoin-data
+    environment:
+      - BITCOIN_RPC_USER=user
+      - BITCOIN_RPC_PASSWORD=pass
+
+volumes:
+  bitcoin-data:
