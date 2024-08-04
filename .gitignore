@@ -35,4 +35,4 @@ rabbitmq_data/
 
 
 # 
-./integration/logs
+/integration/logs/*
