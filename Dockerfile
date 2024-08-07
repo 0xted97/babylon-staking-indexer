@@ -1,4 +1,4 @@
-FROM golang:1.22.3-alpine as builder
+FROM --platform=linux/amd64 golang:1.22.3-alpine as builder
 
 # TARGETPLATFORM should be one of linux/amd64 or linux/arm64.
 ARG TARGETPLATFORM="linux/amd64"
@@ -40,5 +40,6 @@ RUN apk add bash curl jq
 COPY --from=builder /go/src/github.com/babylonchain/staking-indexer/build/sid /bin/sid
 
 WORKDIR /home/staking-indexer
-RUN chown -R staking-indexer /home/staking-indexer
+RUN mkdir -p /home/staking-indexer/.sid/logs && \
+    chown -R staking-indexer:staking-indexer /home/staking-indexer/.sid
 USER staking-indexer
